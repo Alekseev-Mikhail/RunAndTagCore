@@ -35,11 +35,23 @@ public static class NetworkSerializer
         writer.Put(player.X);
         writer.Put(player.Y);
         writer.Put(player.Direction);
-        writer.Put(player.Velocity);
+        writer.Put(player.RayStep);
+        writer.Put(player.MaxRayDistance);
+        writer.Put(player.Fov);
+        writer.Put(player.RotationVelocity);
+        writer.Put(player.MovementVelocity);
     }
 
-    private static Player DeserializePlayer(NetDataReader reader) =>
-        new(reader.GetFloat(), reader.GetFloat(), reader.GetFloat(), reader.GetFloat());
+    private static Player DeserializePlayer(NetDataReader reader) => new(
+        reader.GetFloat(),
+        reader.GetFloat(),
+        reader.GetFloat(),
+        reader.GetFloat(),
+        reader.GetFloat(),
+        reader.GetFloat(),
+        reader.GetFloat(),
+        reader.GetFloat()
+    );
 
     private static void SerializeMap(NetDataWriter writer, Map map)
     {
